@@ -20,17 +20,13 @@ class TopWordsSorter {
     
     public static List<Integer> EMPTY_WORDS_LINES = new ArrayList<>();
     
-    public static void main(final String[] args) {
+    public static void main(final String... args) {
         final ZonedDateTime start = ZonedDateTime.now();
-        if(args.length != 1) {
-            throw new IllegalArgumentException("Argument [0] missing : must be the top-words.txt file path.");
+        if (args.length != 1) {
+            throw new IllegalArgumentException("Argument [0] invalid : must only be the top-words.txt file path.");
         }
-        sortAndPrintWordsByMostFrequent(
-                countWords(
-                        getWords(
-                                loadFile(args[0]))));
+        sortAndPrintWordsByMostFrequent(countWords(getWords(loadFile(args[0]))));
         printInfo(start);
-        
     }
     
     public static void printInfo(final ZonedDateTime start) {
@@ -75,7 +71,7 @@ class TopWordsSorter {
         return words;
     }
     
-    public static HashMap<String, Long> countWords(final List<String> words) {
+    public static Map<String, Long> countWords(final List<String> words) {
         return words.stream().collect(
                 Collectors.groupingBy(
                         Function.identity(),
@@ -84,7 +80,7 @@ class TopWordsSorter {
                 ));
     }
     
-    public static void sortAndPrintWordsByMostFrequent(final HashMap<String, Long> wordsCounted) {
+    public static void sortAndPrintWordsByMostFrequent(final Map<String, Long> wordsCounted) {
         wordsCounted.entrySet().stream()
                 .sorted(Map.Entry.comparingByValue())
                 .forEach(word -> System.out.println(word.getKey() + ": " + word.getValue()));

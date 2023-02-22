@@ -22,6 +22,9 @@ class TopWordsSorter {
     
     public static void main(final String[] args) {
         final ZonedDateTime start = ZonedDateTime.now();
+        if(args.length != 1) {
+            throw new IllegalArgumentException("Argument [0] missing : must be the top-words.txt file path.");
+        }
         sortAndPrintWordsByMostFrequent(
                 countWords(
                         getWords(

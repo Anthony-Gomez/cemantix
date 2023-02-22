@@ -25,7 +25,7 @@ class TopWordsSorter {
         sortAndPrintWordsByMostFrequent(
                 countWords(
                         getWords(
-                                loadFile("/Users/gomez/Folders/Perso/cemantix/topwords.txt"))));
+                                loadFile(args[0]))));
         printInfo(start);
         
     }
